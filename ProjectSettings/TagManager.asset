@@ -16,6 +16,7 @@ TagManager:
   - EffectOn
   - ThemeOff
   - ThemeOn
+  - TetrisPiece
   layers:
   - Default
   - TransparentFX

@@ -25,21 +25,21 @@ public class TetrisDown : MonoBehaviour
         if (CheckLost())
         {
             //Time.timeScale = 0;
-            Controller.instance.GameOver();
+            View.Instance.GameOver();
             GameObject.FindGameObjectWithTag("Theme").GetComponent<AudioSource>().mute = true;
             return;
         }
-        if(Controller.instance.GetPause())
+        if(View.Instance.GetPause())
         {
             return;
         }
-        float speed = (TetrisSpawn.instance.GetScore() >= 200) ? fallTime / 1.5f : fallTime;
+        float speed = (View.Instance.GetScore() >= 200) ? fallTime / 1.5f : fallTime;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             timeSinceLastMove += Time.deltaTime;
             if (timeSinceLastMove >= 0.1f)
             { // Di chuyển đối tượng sau 0.1 giây
-                if (Controller.instance.GetEffect()==1)
+                if (View.Instance.GetEffect()==1)
                     GameObject.FindGameObjectWithTag("Move").GetComponent<AudioSource>().Play();
                 transform.position += new Vector3(-0.5f, 0);
                 if (!ValidMove())
@@ -52,7 +52,7 @@ public class TetrisDown : MonoBehaviour
             timeSinceLastMove += Time.deltaTime;
             if (timeSinceLastMove >= 0.1f)
             { // Di chuyển đối tượng sau 0.1 giây
-                if (Controller.instance.GetEffect()==1)
+                if (View.Instance.GetEffect()==1)
                     GameObject.FindGameObjectWithTag("Move").GetComponent<AudioSource>().Play();
                 transform.position += new Vector3(0.5f, 0);
                 if (!ValidMove())
@@ -60,33 +60,9 @@ public class TetrisDown : MonoBehaviour
                 timeSinceLastMove = 0f;
             }
         }
-        //if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        //{
-        //    transform.position += new Vector3(-0.5f, 0);
-        //    if (!ValidMove())
-        //        transform.position -= new Vector3(-0.5f, 0);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        //{
-        //    transform.position += new Vector3(0.5f, 0);
-        //    if (!ValidMove())
-        //        transform.position -= new Vector3(0.5f, 0);
-        //}
-        //else if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    transform.position = Vector3.left / 0.5f;
-        //    if (!ValidMove())
-        //        transform.position = Vector3.right / 0.5f;
-        //}
-        //else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    transform.position = Vector3.right / 0.5f;
-        //    if (!ValidMove())
-        //        transform.position = Vector3.left / 0.5f;
-        //}
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (Controller.instance.GetEffect() == 1)
+            if (View.Instance.GetEffect() == 1)
                 GameObject.FindGameObjectWithTag("Rotation").GetComponent<AudioSource>().Play();
             transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), 90);
             if (!ValidMove())
@@ -95,7 +71,7 @@ public class TetrisDown : MonoBehaviour
         }
         if (Time.time - priviousTime > ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) ? speed/10:speed))
         {
-            if (Controller.instance.GetEffect() == 1 && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
+            if (View.Instance.GetEffect() == 1 && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
                 GameObject.FindGameObjectWithTag("Move").GetComponent<AudioSource>().Play();
             transform.position += new Vector3(0, -0.5f);
             if (!ValidMove())
@@ -103,7 +79,7 @@ public class TetrisDown : MonoBehaviour
                 transform.position -= new Vector3(0, -0.5f);
                 this.enabled = false;
 
-                if(Controller.instance.GetEffect() == 1)
+                if(View.Instance.GetEffect() == 1)
                     GameObject.FindGameObjectWithTag("Drop").GetComponent<AudioSource>().Play();
 
                 AddGrid();
@@ -184,8 +160,8 @@ public class TetrisDown : MonoBehaviour
     }
     void DestroyRow(int i)
     {
-        TetrisSpawn.instance.SetScore();
-        if(Controller.instance.GetEffect() == 1)
+        View.Instance.SetScore();
+        if(View.Instance.GetEffect() == 1)
             GameObject.FindGameObjectWithTag("RowClear").GetComponent<AudioSource>().Play();
         for (int j = 0; j < 10; j++)
         {
@@ -239,4 +215,5 @@ public class TetrisDown : MonoBehaviour
             }
         }
     }
+    
 }

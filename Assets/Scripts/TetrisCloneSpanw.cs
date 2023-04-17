@@ -5,7 +5,7 @@ using UnityEngine;
 public class TetrisCloneSpanw : MonoBehaviour
 {
     public static TetrisCloneSpanw instance;
-    public GameObject[] tetrisCLone;
+    [SerializeField] private GameObject[] tetrisCLone;
     private GameObject temp;
 
     // Start is called before the first frame update

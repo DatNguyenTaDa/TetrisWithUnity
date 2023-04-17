@@ -19,7 +19,7 @@ public class CoolDown : MonoBehaviour
         if(Mathf.Round(cd)==0)
         {
             this.gameObject.SetActive(false);
-            Controller.instance.Play();
+            View.Instance.Play();
             return;
         }
         GameObject.FindGameObjectWithTag("CDText").GetComponent<TMP_Text>().text = Mathf.Round(cd).ToString();

@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 7288247674691392313}
   m_Layer: 0
   m_Name: I
-  m_TagString: Untagged
+  m_TagString: TetrisPiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationPoint: {x: 0, y: 0, z: 0}
   fallTime: 0.8
+  moveSpeed: 2
 --- !u!1 &5920298604197156305
 GameObject:
   m_ObjectHideFlags: 0
